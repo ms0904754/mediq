@@ -1,12 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'Screens/AuthScreen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: FirebaseOptions(apiKey: "AIzaSyBiK6ecb-CtLzQWs-19QlKlrkdYVqU4RZc", appId: "1:61925396535:android:1bb55eb2fe939fe2986fb2", messagingSenderId: "61925396535", projectId: "mediq-f12e4"));
+  await dotenv.load(fileName: 'assets/config.env');
+  await Firebase.initializeApp(options: FirebaseOptions(apiKey: dotenv.env['API_KEY']!, appId: dotenv.env['APP_ID']!, messagingSenderId: dotenv.env['MSG_ID']!, projectId: dotenv.env['PROJECT_ID']!));
   runApp(const MyApp());
 }
 
